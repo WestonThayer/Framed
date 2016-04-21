@@ -243,3 +243,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# Project specific
+*.appx
+Package.StoreAssociation.xml
+_pkginfo.txt
