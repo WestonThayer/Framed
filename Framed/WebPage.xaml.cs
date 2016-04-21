@@ -82,7 +82,11 @@ namespace Framed
 
             MyWebView.Navigate(new Uri(url));
 
-            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            if (App.IsFullscreenPreferred)
+            {
+                ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            }
+
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
@@ -90,7 +94,11 @@ namespace Framed
         {
             base.OnNavigatingFrom(e);
 
-            ApplicationView.GetForCurrentView().ExitFullScreenMode();
+            if (App.IsFullscreenPreferred)
+            {
+                ApplicationView.GetForCurrentView().ExitFullScreenMode();
+            }
+
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 

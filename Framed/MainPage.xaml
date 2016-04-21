@@ -21,11 +21,19 @@
                 IsSpellCheckEnabled="False"
                 KeyDown="UrlTextBox_KeyDown"
                 PlaceholderText="ex: http://share.framerjs.com/" />
-            <Button Content="Go" MinWidth="120" Margin="0,12,0,12" Click="GoButton_Click" />
+            <Button
+                Content="Go"
+                MinWidth="120"
+                Margin="0,12,0,12"
+                Click="GoButton_Click" />
             <TextBlock
                 Style="{StaticResource BodyTextBlockStyle}"
                 Opacity="0.6"
+                Margin="0,0,0,12"
                 Text="Tip: swipe up from the bottom of the screen to show the back button and return to this page." />
+            
+            <CheckBox x:Name="IsFullScreenCheckBox" Content="Use fullscreen" IsChecked="True" />
+            <!--<CheckBox x:Name="IsKeepAwakeCheckBox" Content="Prevent screen timeout" IsChecked="True" />-->
         </StackPanel>
     </Grid>
 </Page>

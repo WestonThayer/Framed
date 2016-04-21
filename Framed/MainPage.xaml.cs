@@ -43,6 +43,8 @@ namespace Framed
 
         private void nav()
         {
+            App.IsFullscreenPreferred = IsFullScreenCheckBox.IsChecked ?? false;
+
             this.Frame.Navigate(typeof(WebPage), UrlTextBox.Text);
         }
     }
