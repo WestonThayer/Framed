@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -31,17 +32,26 @@ namespace Framed
             SystemNavigationManager.GetForCurrentView().BackRequested += Nav_BackRequested;
         }
 
-        private void Nav_BackRequested(object sender, BackRequestedEventArgs e)
+        private async void Nav_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (MyWebView.CanGoBack && e.Handled == false)
+            // Delay ever so slightly to give WebView a chance to correctly report
+            // CanGoBack
+            await Task.Delay(100);
+
+            // This event handler will occasionally be called twice, so it's important
+            // to check if we've handled it already
+            if (!e.Handled)
             {
-                e.Handled = true;
-                MyWebView.GoBack();
-            }
-            else if (this.Frame.CanGoBack && e.Handled == false)
-            {
-                e.Handled = true;
-                this.Frame.GoBack();
+                if (MyWebView.CanGoBack)
+                {
+                    e.Handled = true;
+                    MyWebView.GoBack();
+                }
+                else if (this.Frame.CanGoBack)
+                {
+                    e.Handled = true;
+                    this.Frame.GoBack();
+                }
             }
         }
 
