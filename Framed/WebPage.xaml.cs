@@ -30,6 +30,7 @@ namespace Framed
             this.InitializeComponent();
 
             SystemNavigationManager.GetForCurrentView().BackRequested += Nav_BackRequested;
+            ApplicationView.GetForCurrentView().FullScreenSystemOverlayMode = FullScreenSystemOverlayMode.Minimal;
         }
 
         private async void Nav_BackRequested(object sender, BackRequestedEventArgs e)
