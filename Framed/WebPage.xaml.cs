@@ -25,20 +25,20 @@ namespace Framed
     /// </summary>
     public sealed partial class WebPage : Page
     {
+        private Settings settings;
+        private bool isLoaded; // If true, we loaded our first page already
+
         public WebPage()
         {
             this.InitializeComponent();
+            this.settings = new Settings();
 
             SystemNavigationManager.GetForCurrentView().BackRequested += Nav_BackRequested;
             ApplicationView.GetForCurrentView().FullScreenSystemOverlayMode = FullScreenSystemOverlayMode.Minimal;
         }
 
-        private async void Nav_BackRequested(object sender, BackRequestedEventArgs e)
+        private void Nav_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            // Delay ever so slightly to give WebView a chance to correctly report
-            // CanGoBack
-            await Task.Delay(100);
-
             // This event handler will occasionally be called twice, so it's important
             // to check if we've handled it already
             if (!e.Handled)
@@ -56,9 +56,10 @@ namespace Framed
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            this.isLoaded = false;
 
             string url = e.Parameter as string;
             Uri urlUri = null;
@@ -80,21 +81,26 @@ namespace Framed
                 urlUri = new Uri(url);
             }
 
-            MyWebView.Navigate(new Uri(url));
-
-            if (App.IsFullscreenPreferred)
+            if (this.settings.IsFullScreen)
             {
                 ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
             }
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
+            // Make sure the user always sees a blank page
+            MyWebView.Navigate(new Uri("ms-appx-web:///landingpage.html"));
+            await Task.Delay(300); // Make sure it ends up on WebView's back stack
+            MyWebView.Navigate(new Uri(url)); // Finally, go to what they asked for
+
+            this.isLoaded = true;
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
 
-            if (App.IsFullscreenPreferred)
+            if (this.settings.IsFullScreen)
             {
                 ApplicationView.GetForCurrentView().ExitFullScreenMode();
             }
@@ -119,6 +125,17 @@ namespace Framed
                 d.PrimaryButtonText = "Ok";
 
                 await d.ShowAsync();
+            }
+
+            // Check for the landing page so that the user doesn't have to press
+            // back an extra time
+            string m = args.Uri.Scheme + "://" + args.Uri.AbsolutePath;
+            if (this.isLoaded && m == "ms-appx-web:///landingpage.html")
+            {
+                if (this.Frame.CanGoBack)
+                {
+                    this.Frame.GoBack();
+                }
             }
         }
     }

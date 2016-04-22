@@ -23,9 +23,12 @@ namespace Framed
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public Settings Settings;
+
         public MainPage()
         {
             this.InitializeComponent();
+            this.Settings = new Settings();
         }
 
         private void GoButton_Click(object sender, RoutedEventArgs e)
@@ -35,16 +38,11 @@ namespace Framed
 
         private void UrlTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == VirtualKey.Enter)
-            {
-                nav();
-            }
+            if (e.Key == VirtualKey.Enter) { nav(); }
         }
 
         private void nav()
         {
-            App.IsFullscreenPreferred = IsFullScreenCheckBox.IsChecked ?? false;
-
             this.Frame.Navigate(typeof(WebPage), UrlTextBox.Text);
         }
     }

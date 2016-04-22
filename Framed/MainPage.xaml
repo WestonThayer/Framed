@@ -7,6 +7,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <local:NullableBoolConverter x:Key="NullableBoolConverter" />
+        <local:TipBoolToOpacityConverter x:Key="TipBoolToOpacity" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel
@@ -20,20 +24,33 @@
                 InputScope="Url"
                 IsSpellCheckEnabled="False"
                 KeyDown="UrlTextBox_KeyDown"
-                PlaceholderText="ex: http://share.framerjs.com/" />
+                PlaceholderText="ex: http://share.framerjs.com/5hoqt6ydidpc/" />
             <Button
                 Content="Go"
                 MinWidth="120"
-                Margin="0,12,0,12"
+                Margin="0,12,0,24"
                 Click="GoButton_Click" />
+
+            <CheckBox
+                x:Name="IsFullScreenCheckBox"
+                Content="Use fullscreen"
+                IsChecked="{x:Bind Settings.IsFullScreen, Mode=TwoWay, Converter={StaticResource NullableBoolConverter}}" />
             <TextBlock
-                Style="{StaticResource BodyTextBlockStyle}"
-                Opacity="0.6"
-                Margin="0,0,0,12"
-                Text="Tip: swipe up from the bottom of the screen to show the back button and return to this page." />
-            
-            <CheckBox x:Name="IsFullScreenCheckBox" Content="Use fullscreen" IsChecked="True" />
-            <!--<CheckBox x:Name="IsKeepAwakeCheckBox" Content="Prevent screen timeout" IsChecked="True" />-->
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Opacity="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}"
+                Margin="0,0,0,24"
+                Text="When fullscreen, swipe up from the bottom of the screen to show the back button. For PCs, move the mouse to the top of the screen." />
+
+            <Button
+                Style="{StaticResource TextBlockButtonStyle}"
+                Padding="0,4,8,4"
+                Content="Show advanced" />
+
+            <StackPanel>
+                <CheckBox
+                    Content="What"
+                    />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>
