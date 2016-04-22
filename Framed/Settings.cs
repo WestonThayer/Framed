@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Framed.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI;
 
 namespace Framed
 {
@@ -19,6 +21,61 @@ namespace Framed
             set
             {
                 ApplicationData.Current.LocalSettings.Values["IsFullScreen"] = value;
+            }
+        }
+
+        public bool IsTitleBarTransparent
+        {
+            get
+            {
+                var v = ApplicationData.Current.LocalSettings.Values["IsTitleBarTransparent"] as bool?;
+                return v ?? false;
+            }
+            set
+            {
+                ApplicationData.Current.LocalSettings.Values["IsTitleBarTransparent"] = value;
+            }
+        }
+
+        public Color TitleBarButtonBackground
+        {
+            get
+            {
+                string v = ApplicationData.Current.LocalSettings.Values["TitleBarButtonBackgroundColor"] as string;
+
+                if (v != null)
+                {
+                    return ColorExtensions.Parse(v);
+                }
+                else
+                {
+                    return Color.FromArgb(0, 0, 0, 0);
+                }
+            }
+            set
+            {
+                ApplicationData.Current.LocalSettings.Values["TitleBarButtonBackgroundColor"] = value.ToString();
+            }
+        }
+
+        public Color TitleBarButtonForeground
+        {
+            get
+            {
+                string v = ApplicationData.Current.LocalSettings.Values["TitleBarButtonForegroundColor"] as string;
+
+                if (v != null)
+                {
+                    return ColorExtensions.Parse(v);
+                }
+                else
+                {
+                    return Color.FromArgb(0, 0, 0, 0);
+                }
+            }
+            set
+            {
+                ApplicationData.Current.LocalSettings.Values["TitleBarButtonForegroundColor"] = value.ToString();
             }
         }
 

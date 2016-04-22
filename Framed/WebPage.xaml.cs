@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -86,6 +88,15 @@ namespace Framed
                 ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
             }
 
+            if (this.settings.IsTitleBarTransparent)
+            {
+                CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+                var t = ApplicationView.GetForCurrentView().TitleBar;
+                t.ButtonBackgroundColor = settings.TitleBarButtonBackground;
+                t.ButtonForegroundColor = settings.TitleBarButtonForeground;
+                Window.Current.SetTitleBar(TitleBarRect);
+            }
+
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 
             // Make sure the user always sees a blank page
@@ -103,6 +114,14 @@ namespace Framed
             if (this.settings.IsFullScreen)
             {
                 ApplicationView.GetForCurrentView().ExitFullScreenMode();
+            }
+
+            if (this.settings.IsTitleBarTransparent)
+            {
+                CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = false;
+                var t = ApplicationView.GetForCurrentView().TitleBar;
+                t.ButtonBackgroundColor = null;
+                t.ButtonForegroundColor = null;
             }
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;

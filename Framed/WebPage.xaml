@@ -15,6 +15,15 @@
             VerticalAlignment="Stretch"
             NavigationStarting="MyWebView_NavigationStarting"
             NavigationCompleted="MyWebView_NavigationCompleted" />
+        <!-- TitleBarRect doesn't do anything, it sits under the window close button.
+        It forces Windows to render the smallest draggable area possible. -->
+        <Rectangle
+            x:Name="TitleBarRect"
+            Fill="Transparent"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right"
+            Width="10"
+            Height="32" />
         <ProgressBar
             x:Name="LoadingProgressBar"
             HorizontalAlignment="Stretch"

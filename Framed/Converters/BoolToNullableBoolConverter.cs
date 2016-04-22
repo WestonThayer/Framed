@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Framed
 {
-    public sealed class NullableBoolConverter : IValueConverter
+    public sealed class BoolToNullableBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {

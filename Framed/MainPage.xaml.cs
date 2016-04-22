@@ -23,11 +23,14 @@ namespace Framed
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private bool isAdvancedVisible;
+
         public Settings Settings;
 
         public MainPage()
         {
             this.InitializeComponent();
+            this.isAdvancedVisible = false;
             this.Settings = new Settings();
         }
 
@@ -44,6 +47,25 @@ namespace Framed
         private void nav()
         {
             this.Frame.Navigate(typeof(WebPage), UrlTextBox.Text);
+        }
+
+        private void ShowAdvancedButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = sender as Button;
+
+            if (!this.isAdvancedVisible)
+            {
+                this.isAdvancedVisible = true;
+                b.Content = "Hide advanced";
+                AdvancedStackPanel.Visibility = Visibility.Visible;
+                AdvancedStackPanelShowStoryboard.Begin();
+            }
+            else
+            {
+                this.isAdvancedVisible = false;
+                b.Content = "Show advanced";
+                AdvancedStackPanel.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

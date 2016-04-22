@@ -8,49 +8,107 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
-        <local:NullableBoolConverter x:Key="NullableBoolConverter" />
+        <local:BoolToNullableBoolConverter x:Key="BoolToNullableBool" />
+        <local:NotNullableBoolToBoolConverter x:Key="NotNullableBoolToBool" />
         <local:TipBoolToOpacityConverter x:Key="TipBoolToOpacity" />
+        <local:ColorToStringConverter x:Key="ColorToString" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel
-            VerticalAlignment="Center"
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Mobile" />
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="480" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootStackPanel.Margin" Value="12,200,12,88" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <ScrollViewer
+            x:Name="RootScrollViewer"
+            HorizontalScrollMode="Disabled"
+            VerticalScrollBarVisibility="Hidden"
+            VerticalAlignment="Top"
             HorizontalAlignment="Stretch"
-            MaxWidth="500"
-            Padding="12,0,12,0">
-            <TextBox
-                x:Name="UrlTextBox"
-                Header="Website or URL"
-                InputScope="Url"
-                IsSpellCheckEnabled="False"
-                KeyDown="UrlTextBox_KeyDown"
-                PlaceholderText="ex: http://share.framerjs.com/5hoqt6ydidpc/" />
-            <Button
-                Content="Go"
-                MinWidth="120"
-                Margin="0,12,0,24"
-                Click="GoButton_Click" />
+            MaxWidth="500">
+            <StackPanel x:Name="RootStackPanel" Margin="12,12,12,88">
+                <TextBox
+                    x:Name="UrlTextBox"
+                    Header="Website or URL"
+                    InputScope="Url"
+                    IsSpellCheckEnabled="False"
+                    KeyDown="UrlTextBox_KeyDown"
+                    PlaceholderText="ex: http://share.framerjs.com/5hoqt6ydidpc/" />
+                <Button
+                    Content="Go"
+                    MinWidth="120"
+                    Margin="0,12,0,24"
+                    Click="GoButton_Click" />
 
-            <CheckBox
-                x:Name="IsFullScreenCheckBox"
-                Content="Use fullscreen"
-                IsChecked="{x:Bind Settings.IsFullScreen, Mode=TwoWay, Converter={StaticResource NullableBoolConverter}}" />
-            <TextBlock
-                Style="{StaticResource CaptionTextBlockStyle}"
-                Opacity="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}"
-                Margin="0,0,0,24"
-                Text="When fullscreen, swipe up from the bottom of the screen to show the back button. For PCs, move the mouse to the top of the screen." />
-
-            <Button
-                Style="{StaticResource TextBlockButtonStyle}"
-                Padding="0,4,8,4"
-                Content="Show advanced" />
-
-            <StackPanel>
                 <CheckBox
-                    Content="What"
-                    />
+                    x:Name="IsFullScreenCheckBox"
+                    Content="Use fullscreen"
+                    IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=TwoWay, Converter={StaticResource NotNullableBoolToBool}}"
+                    IsChecked="{x:Bind Settings.IsFullScreen, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
+                <TextBlock
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Opacity="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}"
+                    Margin="0,0,0,24"
+                    Text="When fullscreen, swipe up from the bottom of the screen to show the back button. For PCs, move the mouse to the top of the screen." />
+
+                <Button
+                    Style="{StaticResource TextBlockButtonStyle}"
+                    Padding="0,4,8,4"
+                    Click="ShowAdvancedButton_Click"
+                    Content="Show advanced" />
+
+                <StackPanel x:Name="AdvancedStackPanel" Visibility="Collapsed">
+                    <StackPanel.Resources>
+                        <Storyboard x:Name="AdvancedStackPanelShowStoryboard">
+                            <DoubleAnimation
+                                Storyboard.TargetName="AdvancedStackPanel"
+                                Storyboard.TargetProperty="Opacity"
+                                Duration="00:00:0.2"
+                                From="0"
+                                To="1" />
+                        </Storyboard>
+                    </StackPanel.Resources>
+                    
+                    <CheckBox
+                        x:Name="IsTitleBarTransparentCheckBox"
+                        Content="Hide titlebar"
+                        IsEnabled="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NotNullableBoolToBool}}"
+                        IsChecked="{x:Bind Settings.IsTitleBarTransparent, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
+                    <TextBlock
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Opacity="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}"
+                        Margin="0,0,0,24">
+                        <Run Text="Make the PC title bar transparent. Your prototype will use the full height of the window, but the upper right corner containing the " />
+                        <Run FontSize="10" FontFamily="Segoe MDL2 Assets" Text="&#xE108; &#xE003; &#xE10A;" />
+                        <Run Text=" controls will be overlayed. To move the window, drag the space to left of minimize. Close and restart the app to get back to this page." />
+                    </TextBlock>
+
+                    <TextBox
+                        IsEnabled="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NotNullableBoolToBool}}"
+                        Header="Titlebar button background (ARGB)"
+                        Text="{x:Bind Settings.TitleBarButtonBackground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
+                        InputScope="Digits"
+                        IsSpellCheckEnabled="False"
+                        HorizontalAlignment="Left" />
+                    <TextBox
+                        IsEnabled="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NotNullableBoolToBool}}"
+                        Header="Titlebar button foreground (ARGB)"
+                        Text="{x:Bind Settings.TitleBarButtonForeground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
+                        InputScope="Digits"
+                        IsSpellCheckEnabled="False"
+                        HorizontalAlignment="Left" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

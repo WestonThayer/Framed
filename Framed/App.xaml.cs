@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 namespace Framed
@@ -54,6 +55,8 @@ namespace Framed
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+                rootFrame.ContentTransitions = new TransitionCollection();
+                rootFrame.ContentTransitions.Add(new NavigationThemeTransition());
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
