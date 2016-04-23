@@ -156,6 +156,22 @@ namespace Framed
                     this.Frame.GoBack();
                 }
             }
+
+            // Inject <F5>, <CTRL + R> support for refreshing
+            // <ALT + LEFT_ARROW> support to go back
+            string js = 
+@"window.addEventListener('keydown', function(event) {if (event.key === 'F5') {
+        location.reload();
+    }
+    else if (event.ctrlKey && event.key === 'r') {
+        location.reload();
+    }
+    else if (event.altKey && event.key === 'Left') {
+        window.history.back();
+    }
+}, false);";
+
+            await MyWebView.InvokeScriptAsync("eval", new string[] { js });
         }
     }
 }
