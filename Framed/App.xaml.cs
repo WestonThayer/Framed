@@ -8,6 +8,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -67,6 +68,9 @@ namespace Framed
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                // Set our min window width
+                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(420, 320));
             }
 
             if (e.PrelaunchActivated == false)
