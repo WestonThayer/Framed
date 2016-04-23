@@ -9,6 +9,7 @@
     mc:Ignorable="d">
     <Page.Resources>
         <local:BoolToNullableBoolConverter x:Key="BoolToNullableBool" />
+        <local:NullableBoolToBoolConverter x:Key="NullableBoolToBool" />
         <local:NotNullableBoolToBoolConverter x:Key="NotNullableBoolToBool" />
         <local:TipBoolToOpacityConverter x:Key="TipBoolToOpacity" />
         <local:ColorToStringConverter x:Key="ColorToString" />
@@ -64,6 +65,7 @@
                 <Button
                     Style="{StaticResource TextBlockButtonStyle}"
                     Padding="0,4,8,4"
+                    Margin="0,0,0,12"
                     Click="ShowAdvancedButton_Click"
                     Content="Show advanced" />
 
@@ -94,19 +96,43 @@
                     </TextBlock>
 
                     <TextBox
-                        IsEnabled="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NotNullableBoolToBool}}"
+                        IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
                         Header="Titlebar button background (ARGB)"
                         Text="{x:Bind Settings.TitleBarButtonBackground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
                         InputScope="Digits"
                         IsSpellCheckEnabled="False"
                         HorizontalAlignment="Left" />
                     <TextBox
-                        IsEnabled="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NotNullableBoolToBool}}"
+                        IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
                         Header="Titlebar button foreground (ARGB)"
                         Text="{x:Bind Settings.TitleBarButtonForeground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
                         InputScope="Digits"
                         IsSpellCheckEnabled="False"
                         HorizontalAlignment="Left" />
+
+                    <ToggleSwitch
+                        OnContent="Keyboard shortcuts on"
+                        OffContent="Keyboard shortcuts off"
+                        Margin="0,24,0,0"
+                        IsOn="{x:Bind Settings.IsKeyboardShortcutsEnabled, Mode=TwoWay}" />
+                    <TextBlock
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Opacity="0.6">
+                        <Run Text="Use " />
+                        <Run FontFamily="Consolas" Text="&lt;F5&gt;" />
+                        <Run Text=" or " />
+                        <Run FontFamily="Consolas" Text="&lt;CTRL + R&gt;" />
+                        <Run Text=" to refresh. " />
+                        <Run FontFamily="Consolas" Text="&lt;ALT + LEFT_ARROW&gt;" />
+                        <Run Text=" to go back." />
+                    </TextBlock>
+
+                    <CheckBox
+                        x:Name="IsCameraShortcutEnabledCheckBox"
+                        Visibility="Collapsed"
+                        Content="Press camera button to refresh"
+                        Margin="0,24,0,0"
+                        IsChecked="{x:Bind Settings.IsCameraShortcutEnabled, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

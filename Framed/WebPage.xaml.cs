@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
@@ -37,6 +39,17 @@ namespace Framed
 
             SystemNavigationManager.GetForCurrentView().BackRequested += Nav_BackRequested;
             ApplicationView.GetForCurrentView().FullScreenSystemOverlayMode = FullScreenSystemOverlayMode.Minimal;
+
+            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons") &&
+                settings.IsCameraShortcutEnabled)
+            {
+                HardwareButtons.CameraPressed += HardwareButtons_CameraPressed;
+            }
+        }
+
+        private void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
+        {
+            MyWebView.Refresh();
         }
 
         private void Nav_BackRequested(object sender, BackRequestedEventArgs e)
@@ -171,7 +184,10 @@ namespace Framed
     }
 }, false);";
 
-            await MyWebView.InvokeScriptAsync("eval", new string[] { js });
+            if (settings.IsKeyboardShortcutsEnabled)
+            {
+                await MyWebView.InvokeScriptAsync("eval", new string[] { js });
+            }
         }
     }
 }

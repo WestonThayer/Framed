@@ -79,6 +79,32 @@ namespace Framed
             }
         }
 
+        public bool IsKeyboardShortcutsEnabled
+        {
+            get
+            {
+                var v = ApplicationData.Current.LocalSettings.Values["IsKeyboardShortcutsEnabled"] as bool?;
+                return v ?? true; // Turn them on by default
+            }
+            set
+            {
+                ApplicationData.Current.LocalSettings.Values["IsKeyboardShortcutsEnabled"] = value;
+            }
+        }
+
+        public bool IsCameraShortcutEnabled
+        {
+            get
+            {
+                var v = ApplicationData.Current.LocalSettings.Values["IsCameraShortcutEnabled"] as bool?;
+                return v ?? true; // Turn it on by default
+            }
+            set
+            {
+                ApplicationData.Current.LocalSettings.Values["IsCameraShortcutEnabled"] = value;
+            }
+        }
+
         public Settings()
         {
 

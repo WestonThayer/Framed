@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,6 +33,11 @@ namespace Framed
             this.InitializeComponent();
             this.isAdvancedVisible = false;
             this.Settings = new Settings();
+
+            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                IsCameraShortcutEnabledCheckBox.Visibility = Visibility.Visible;
+            }
         }
 
         private void GoButton_Click(object sender, RoutedEventArgs e)
