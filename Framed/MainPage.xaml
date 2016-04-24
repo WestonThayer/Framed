@@ -203,7 +203,7 @@
                                 IsHitTestVisible="False"
                                 IsTabStop="False"
                                 Margin="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}"
+                                Padding="10,3,32,5"
                                 Grid.Row="1" />
                             <Button
                                 x:Name="GoButton"
