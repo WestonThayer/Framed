@@ -13,18 +13,229 @@
         <local:NotNullableBoolToBoolConverter x:Key="NotNullableBoolToBool" />
         <local:TipBoolToOpacityConverter x:Key="TipBoolToOpacity" />
         <local:ColorToStringConverter x:Key="ColorToString" />
+
+        <Style x:Key="UrlTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Grid.Resources>
+                                <Style x:Name="GoButtonStyle" TargetType="Button">
+                                    <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid
+                                                    x:Name="ButtonLayoutGrid"
+                                                    BorderBrush="{ThemeResource TextBoxButtonBorderThemeBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}">
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal" />
+                                                            <VisualState x:Name="PointerOver">
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonLayoutGrid">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="GlyphElement">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Pressed">
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonLayoutGrid">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAccentBrush}" />
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="GlyphElement">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltChromeWhiteBrush}" />
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Disabled">
+                                                                <Storyboard>
+                                                                    <DoubleAnimation
+                                                                        Duration="0"
+                                                                        To="0"
+                                                                        Storyboard.TargetProperty="Opacity"
+                                                                        Storyboard.TargetName="ButtonLayoutGrid" />
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <TextBlock
+                                                        x:Name="GlyphElement"
+                                                        AutomationProperties.AccessibilityView="Raw"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        FontStyle="Normal"
+                                                        FontSize="12"
+                                                        FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                                        HorizontalAlignment="Center"
+                                                        Text="&#xE0AB;"
+                                                        VerticalAlignment="Center" />
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="HeaderContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BackgroundElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledTransparentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BorderElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="PlaceholderTextContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightChromeAltLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBackgroundHoverOpacity}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="PlaceholderTextContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlPageTextChromeBlackMediumLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BackgroundElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundChromeWhiteBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBackgroundFocusedOpacity}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="BorderElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundChromeBlackHighBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="RequestedTheme" Storyboard.TargetName="ContentElement">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Light" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="GoButton">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundChromeWhiteBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="GoButton">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border
+                                x:Name="BackgroundElement"
+                                Background="{TemplateBinding Background}"
+                                Grid.ColumnSpan="2"
+                                Margin="{TemplateBinding BorderThickness}"
+                                Opacity="{ThemeResource TextControlBackgroundRestOpacity}"
+                                Grid.Row="1"
+                                Grid.RowSpan="1" />
+                            <Border
+                                x:Name="BorderElement"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="1"
+                                Grid.RowSpan="1" />
+                            <ContentPresenter
+                                x:Name="HeaderContentPresenter"
+                                Grid.ColumnSpan="2"
+                                ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                Content="{TemplateBinding Header}"
+                                Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                FontWeight="Normal"
+                                Margin="0,0,0,8"
+                                Grid.Row="0"
+                                Visibility="Collapsed"
+                                x:DeferLoadStrategy="Lazy" />
+                            <ScrollViewer
+                                x:Name="ContentElement"
+                                AutomationProperties.AccessibilityView="Raw"
+                                HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                IsTabStop="False"
+                                IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                Margin="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                Grid.Row="1"
+                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                ZoomMode="Disabled" />
+                            <ContentControl
+                                x:Name="PlaceholderTextContentPresenter"
+                                Grid.ColumnSpan="2"
+                                Content="{TemplateBinding PlaceholderText}"
+                                Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"
+                                IsHitTestVisible="False"
+                                IsTabStop="False"
+                                Margin="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                Grid.Row="1" />
+                            <Button
+                                x:Name="GoButton"
+                                Click="GoButton_Click"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Grid.Column="1"
+                                FontSize="{TemplateBinding FontSize}"
+                                IsTabStop="False"
+                                Margin="{ThemeResource HelperButtonThemePadding}"
+                                MinWidth="34"
+                                Grid.Row="1"
+                                Style="{StaticResource GoButtonStyle}"
+                                VerticalAlignment="Stretch" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Mobile" />
                 <VisualState x:Name="Desktop">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="480" />
+                        <AdaptiveTrigger MinWindowWidth="655" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="RootStackPanel.Margin" Value="12,200,12,88" />
+                        <Setter Target="RootStackPanel.Margin" Value="24,80,24,88" />
+                        <Setter Target="RootStackPanel.Width" Value="600" />
+                        <Setter Target="RootStackPanel.HorizontalAlignment" Value="Center" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -33,106 +244,108 @@
         <ScrollViewer
             x:Name="RootScrollViewer"
             HorizontalScrollMode="Disabled"
-            VerticalScrollBarVisibility="Hidden"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Stretch"
-            MaxWidth="500">
-            <StackPanel x:Name="RootStackPanel" Margin="12,12,12,88">
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch">
+            <StackPanel
+                x:Name="RootStackPanel"
+                Margin="12,80,12,88"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Stretch">
+                <TextBlock
+                    Text="Prototype URL"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    FontWeight="SemiLight"
+                    Margin="0,0,0,32"
+                    HorizontalAlignment="Center" />
                 <TextBox
                     x:Name="UrlTextBox"
-                    Header="Website or URL"
+                    Style="{StaticResource UrlTextBoxStyle}"
                     InputScope="Url"
                     IsSpellCheckEnabled="False"
                     KeyDown="UrlTextBox_KeyDown"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,0,0,60"
                     PlaceholderText="ex: http://share.framerjs.com/5hoqt6ydidpc/" />
-                <Button
-                    Content="Go"
-                    MinWidth="120"
-                    Margin="0,12,0,24"
-                    Click="GoButton_Click" />
 
-                <CheckBox
-                    x:Name="IsFullScreenCheckBox"
-                    Content="Use fullscreen"
-                    IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=TwoWay, Converter={StaticResource NotNullableBoolToBool}}"
-                    IsChecked="{x:Bind Settings.IsFullScreen, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
-                <TextBlock
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Opacity="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}"
-                    Margin="0,0,0,24"
-                    Text="When fullscreen, swipe up from the bottom of the screen to show the back button. For PCs, move the mouse to the top of the screen." />
-
-                <Button
-                    Style="{StaticResource TextBlockButtonStyle}"
-                    Padding="0,4,8,4"
-                    Margin="0,0,0,12"
-                    Click="ShowAdvancedButton_Click"
-                    Content="Show advanced" />
-
-                <StackPanel x:Name="AdvancedStackPanel" Visibility="Collapsed">
-                    <StackPanel.Resources>
-                        <Storyboard x:Name="AdvancedStackPanelShowStoryboard">
-                            <DoubleAnimation
-                                Storyboard.TargetName="AdvancedStackPanel"
-                                Storyboard.TargetProperty="Opacity"
-                                Duration="00:00:0.2"
-                                From="0"
-                                To="1" />
-                        </Storyboard>
-                    </StackPanel.Resources>
-                    
+                <StackPanel MaxWidth="400" HorizontalAlignment="Left">
                     <CheckBox
-                        x:Name="IsTitleBarTransparentCheckBox"
-                        Content="Hide titlebar"
-                        IsEnabled="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NotNullableBoolToBool}}"
-                        IsChecked="{x:Bind Settings.IsTitleBarTransparent, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
+                        x:Name="IsFullScreenCheckBox"
+                        Content="Use fullscreen"
+                        IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=TwoWay, Converter={StaticResource NotNullableBoolToBool}}"
+                        IsChecked="{x:Bind Settings.IsFullScreen, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
                     <TextBlock
                         Style="{StaticResource CaptionTextBlockStyle}"
-                        Opacity="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}"
-                        Margin="0,0,0,24">
-                        <Run Text="Make the PC title bar transparent. Your prototype will use the full height of the window, but the upper right corner containing the " />
-                        <Run FontSize="10" FontFamily="Segoe MDL2 Assets" Text="&#xE108; &#xE003; &#xE10A;" />
-                        <Run Text=" controls will be overlayed. To move the window, drag the space to left of minimize. Close and restart the app to get back to this page." />
-                    </TextBlock>
+                        Opacity="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}"
+                        Margin="0,0,0,24"
+                        Text="When fullscreen, swipe up from the bottom of the screen to show the back button. For PCs, move the mouse to the top of the screen." />
 
-                    <TextBox
-                        IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
-                        Header="Titlebar button background (ARGB)"
-                        Text="{x:Bind Settings.TitleBarButtonBackground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
-                        InputScope="Digits"
-                        IsSpellCheckEnabled="False"
-                        HorizontalAlignment="Left" />
-                    <TextBox
-                        IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
-                        Header="Titlebar button foreground (ARGB)"
-                        Text="{x:Bind Settings.TitleBarButtonForeground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
-                        InputScope="Digits"
-                        IsSpellCheckEnabled="False"
-                        HorizontalAlignment="Left" />
+                    <Button
+                        Style="{StaticResource TextBlockButtonStyle}"
+                        Padding="0,4,8,4"
+                        Margin="0,0,0,12"
+                        Click="ShowAdvancedButton_Click"
+                        Content="Show advanced" />
 
-                    <ToggleSwitch
-                        OnContent="Keyboard shortcuts on"
-                        OffContent="Keyboard shortcuts off"
-                        Margin="0,24,0,0"
-                        IsOn="{x:Bind Settings.IsKeyboardShortcutsEnabled, Mode=TwoWay}" />
-                    <TextBlock
-                        Style="{StaticResource CaptionTextBlockStyle}"
-                        Opacity="0.6">
-                        <Run Text="Use " />
-                        <Run FontFamily="Consolas" Text="&lt;F5&gt;" />
-                        <Run Text=" or " />
-                        <Run FontFamily="Consolas" Text="&lt;CTRL + R&gt;" />
-                        <Run Text=" to refresh. " />
-                        <Run FontFamily="Consolas" Text="&lt;ALT + LEFT_ARROW&gt;" />
-                        <Run Text=" to go back." />
-                    </TextBlock>
+                    <StackPanel x:Name="AdvancedStackPanel" Visibility="Collapsed">
+                        <StackPanel.Resources>
+                            <Storyboard x:Name="AdvancedStackPanelShowStoryboard">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="AdvancedStackPanel"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="00:00:0.2"
+                                    From="0"
+                                    To="1" />
+                            </Storyboard>
+                        </StackPanel.Resources>
 
-                    <CheckBox
-                        x:Name="IsCameraShortcutEnabledCheckBox"
-                        Visibility="Collapsed"
-                        Content="Press camera button to refresh"
-                        Margin="0,24,0,0"
-                        IsChecked="{x:Bind Settings.IsCameraShortcutEnabled, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
+                        <CheckBox
+                            x:Name="IsTitleBarTransparentCheckBox"
+                            Content="Hide titlebar"
+                            IsEnabled="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NotNullableBoolToBool}}"
+                            IsChecked="{x:Bind Settings.IsTitleBarTransparent, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
+                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Opacity="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}" Margin="0,0,0,24">
+                            <Run Text="Make the PC title bar transparent. Your prototype will use the full height of the window, but the upper right corner containing the " />
+                            <Run FontSize="10" FontFamily="Segoe MDL2 Assets" Text="&#xE108; &#xE003; &#xE10A;" />
+                            <Run Text=" controls will be overlayed. To move the window, drag the space to left of minimize. Close and restart the app to get back to this page." />
+                        </TextBlock>
+
+                        <TextBox
+                            IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
+                            Header="Titlebar button background (ARGB)"
+                            Text="{x:Bind Settings.TitleBarButtonBackground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
+                            InputScope="Digits"
+                            IsSpellCheckEnabled="False"
+                            HorizontalAlignment="Left" />
+                        <TextBox
+                            IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
+                            Header="Titlebar button foreground (ARGB)"
+                            Text="{x:Bind Settings.TitleBarButtonForeground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
+                            InputScope="Digits"
+                            IsSpellCheckEnabled="False"
+                            HorizontalAlignment="Left" />
+
+                        <ToggleSwitch
+                            OnContent="Keyboard shortcuts on"
+                            OffContent="Keyboard shortcuts off"
+                            Margin="0,24,0,0"
+                            IsOn="{x:Bind Settings.IsKeyboardShortcutsEnabled, Mode=TwoWay}" />
+                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Opacity="0.6">
+                            <Run Text="Use " />
+                            <Run FontFamily="Consolas" Text="&lt;F5&gt;" />
+                            <Run Text=" or " />
+                            <Run FontFamily="Consolas" Text="&lt;CTRL + R&gt;" />
+                            <Run Text=" to refresh. " />
+                            <Run FontFamily="Consolas" Text="&lt;ALT + LEFT_ARROW&gt;" />
+                            <Run Text=" to go back." />
+                        </TextBlock>
+
+                        <CheckBox
+                            x:Name="IsCameraShortcutEnabledCheckBox"
+                            Visibility="Collapsed"
+                            Content="Press camera button to refresh"
+                            Margin="0,24,0,0"
+                            IsChecked="{x:Bind Settings.IsCameraShortcutEnabled, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
