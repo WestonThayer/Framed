@@ -252,7 +252,7 @@
                 VerticalAlignment="Top"
                 HorizontalAlignment="Stretch">
                 <TextBlock
-                    Text="Prototype URL"
+                    Text="Where to?"
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     FontWeight="SemiLight"
                     Margin="0,0,0,32"
@@ -306,7 +306,9 @@
                         <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Opacity="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}" Margin="0,0,0,24">
                             <Run Text="Make the PC title bar transparent. Your prototype will use the full height of the window, but the upper right corner containing the " />
                             <Run FontSize="10" FontFamily="Segoe MDL2 Assets" Text="&#xE108; &#xE003; &#xE10A;" />
-                            <Run Text=" controls will be overlayed. To move the window, drag the space to left of minimize. Close and restart the app to get back to this page." />
+                            <Run Text=" controls will be overlayed. To move the window, drag the space to left of minimize. Restart the app or use " />
+                            <Run FontFamily="Consolas" Text="&lt;ALT + LEFT_ARROW&gt;" />
+                            <Run Text=" to get back to this page." />
                         </TextBlock>
 
                         <TextBox
