@@ -70,7 +70,7 @@ namespace Framed
                 Window.Current.Content = rootFrame;
 
                 // Set our min window width
-                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(420, 320));
+                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 320));
             }
 
             if (e.PrelaunchActivated == false)
