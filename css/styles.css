@@ -96,9 +96,11 @@ a {
       text-align: center; } }
 
 .feature-phone__img__break {
+  -webkit-transform: translate3d(-200px, 0px, 0px);
   transform: translate3d(-200px, 0px, 0px); }
   @media (max-width: 848px) {
     .feature-phone__img__break {
+      -webkit-transform: none;
       transform: none; } }
 
 .feature-phone__features__break {
@@ -155,11 +157,19 @@ a {
 .pc-row {
   background-color: #004E8C; }
   .pc-row > .pc-row__content {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
     align-items: center; }
     @media (max-width: 848px) {
       .pc-row > .pc-row__content {
+        -webkit-flex-direction: column-reverse;
+        -ms-flex-direction: column-reverse;
         flex-direction: column-reverse; } }
   @media (max-width: 848px) {
     .pc-row .pc-row__device-features {
@@ -172,12 +182,23 @@ a {
         max-width: 100%; } }
 
 .go-btns {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
   justify-content: center; }
   @media (max-width: 468px) {
     .go-btns {
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
       flex-direction: column;
+      -webkit-justify-content: initial;
+      -ms-flex-pack: initial;
       justify-content: initial;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      -ms-grid-row-align: center;
       align-items: center; } }
   .go-btns > .go-btns__second {
     margin: 0 0 0 12px; }

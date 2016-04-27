@@ -4,6 +4,7 @@ var gulp = require("gulp");
 var sass = require("gulp-sass");
 var imagemin = require("gulp-imagemin");
 var pngquant = require("imagemin-pngquant");
+var autoprefixer = require("gulp-autoprefixer");
  
 gulp.task("sass", function () {
     return gulp.src("./scss/**/*.scss")
@@ -19,4 +20,10 @@ gulp.task("minify-images", function() {
     return gulp.src("assets/*.png")
         .pipe(imagemin({ use: [pngquant()] }))
         .pipe(gulp.dest("distassets/"));
+});
+
+gulp.task("autoprefix", function() {
+    gulp.src("css/styles.css")
+        .pipe(autoprefixer({ browsers: ["last 2 versions"], cascade: false }))
+        .pipe(gulp.dest("css/"));
 });
