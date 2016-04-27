@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Framed.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Foundation.Metadata;
@@ -25,6 +27,8 @@ namespace Framed
     public sealed partial class MainPage : Page
     {
         private bool isAdvancedVisible;
+        private Regex argbRx = new Regex("#[0-9a-fA-F]{8}");
+        private Regex rgbRx = new Regex("#[0-9a-fA-F]{6}");
 
         public Settings Settings;
 
@@ -38,6 +42,9 @@ namespace Framed
             {
                 IsCameraShortcutEnabledCheckBox.Visibility = Visibility.Visible;
             }
+
+            ARGBColorTextBox.Text = this.Settings.TitleBarButtonBackground.ToString();
+            RGBColorTextBox.Text = this.Settings.TitleBarButtonForeground.ToString(true);
         }
 
         private void GoButton_Click(object sender, RoutedEventArgs e)
@@ -71,6 +78,56 @@ namespace Framed
                 this.isAdvancedVisible = false;
                 b.Content = "Show advanced";
                 AdvancedStackPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+
+
+        private void ARGBColorTextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (tb.Text.Length > 9 || !argbRx.IsMatch(tb.Text))
+            {
+                TitleBarButtonBackgroundErrorTextBlock.Text = "Invalid color";
+            }
+            else
+            {
+                TitleBarButtonBackgroundErrorTextBlock.Text = string.Empty;
+            }
+        }
+
+        private void ARGBColorTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (tb.Text.Length == 9 && argbRx.IsMatch(tb.Text))
+            {
+                this.Settings.TitleBarButtonBackground = ColorExtensions.Parse(tb.Text);
+            }
+        }
+
+        private void RGBColorTextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (tb.Text.Length > 7 || !rgbRx.IsMatch(tb.Text))
+            {
+                TitleBarButtonForegroundErrorTextBlock.Text = "Invalid color";
+            }
+            else
+            {
+                TitleBarButtonForegroundErrorTextBlock.Text = string.Empty;
+            }
+        }
+
+        private void RGBColorTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (tb.Text.Length == 7 && rgbRx.IsMatch(tb.Text))
+            {
+                this.Settings.TitleBarButtonForeground = ColorExtensions.Parse(tb.Text);
             }
         }
     }

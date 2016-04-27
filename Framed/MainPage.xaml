@@ -12,7 +12,6 @@
         <local:NullableBoolToBoolConverter x:Key="NullableBoolToBool" />
         <local:NotNullableBoolToBoolConverter x:Key="NotNullableBoolToBool" />
         <local:TipBoolToOpacityConverter x:Key="TipBoolToOpacity" />
-        <local:ColorToStringConverter x:Key="ColorToString" />
 
         <Style x:Key="UrlTextBoxStyle" TargetType="TextBox">
             <Setter Property="Template">
@@ -311,20 +310,38 @@
                             <Run Text=" to get back to this page." />
                         </TextBlock>
 
-                        <TextBox
-                            IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
-                            Header="Titlebar button background (ARGB)"
-                            Text="{x:Bind Settings.TitleBarButtonBackground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
-                            InputScope="Digits"
-                            IsSpellCheckEnabled="False"
-                            HorizontalAlignment="Left" />
-                        <TextBox
-                            IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
-                            Header="Titlebar button foreground (ARGB)"
-                            Text="{x:Bind Settings.TitleBarButtonForeground, Mode=TwoWay, Converter={StaticResource ColorToString}}"
-                            InputScope="Digits"
-                            IsSpellCheckEnabled="False"
-                            HorizontalAlignment="Left" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,12">
+                            <TextBox
+                                x:Name="ARGBColorTextBox"
+                                IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
+                                Header="Titlebar button background (ARGB)"
+                                TextChanging="ARGBColorTextBox_TextChanging"
+                                TextChanged="ARGBColorTextBox_TextChanged"
+                                InputScope="Digits"
+                                IsSpellCheckEnabled="False" />
+                            <TextBlock
+                                x:Name="TitleBarButtonBackgroundErrorTextBlock"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                VerticalAlignment="Bottom"
+                                Margin="4,0,0,8"
+                                Foreground="Red" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBox
+                                x:Name="RGBColorTextBox"
+                                IsEnabled="{x:Bind IsTitleBarTransparentCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
+                                Header="Titlebar button foreground (RGB)"
+                                TextChanging="RGBColorTextBox_TextChanging"
+                                TextChanged="RGBColorTextBox_TextChanged"
+                                InputScope="Digits"
+                                IsSpellCheckEnabled="False" />
+                            <TextBlock
+                                x:Name="TitleBarButtonForegroundErrorTextBlock"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                VerticalAlignment="Bottom"
+                                Margin="4,0,0,8"
+                                Foreground="Red" />
+                        </StackPanel>
 
                         <ToggleSwitch
                             OnContent="Keyboard shortcuts on"

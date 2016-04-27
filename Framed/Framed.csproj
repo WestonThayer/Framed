@@ -100,7 +100,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ColorToStringConverter.cs" />
     <Compile Include="Converters\NotNullableBoolToBoolConverter.cs" />
     <Compile Include="Converters\NullableBoolToBoolConverter.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />

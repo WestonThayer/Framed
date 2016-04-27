@@ -18,9 +18,28 @@ namespace Framed.Extensions
             byte a = Byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
             byte r = Byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
             byte g = Byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
-            byte b = Byte.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
 
-            return Color.FromArgb(a, r, g, b);
+            if (v.Length == 9)
+            {
+                byte b = Byte.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+                return Color.FromArgb(a, r, g, b);
+            }
+            else
+            {
+                return Color.FromArgb(1, a, r, g);
+            }
+        }
+
+        public static string ToString(this Color c, bool useAlpha)
+        {
+            string s = c.ToString();
+
+            if (useAlpha)
+            {
+                return "#" + s.Substring(3);
+            }
+
+            return s;
         }
     }
 }
