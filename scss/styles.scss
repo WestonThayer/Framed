@@ -13,7 +13,7 @@ $bp-sm: 632px;
 body {
     background-color: $primary-bg;
     color: white;
-    @include font-family_regular();
+    font-family: $native-font-family;
     font-size: 15px;
     font-weight: normal;
 }
@@ -38,7 +38,7 @@ a {
     
     @media (max-width: $bp-md) {
         width: auto;
-        margin: 0 24px;
+        margin: 0 3%;
     }
 }
 
@@ -49,7 +49,7 @@ a {
     
     @media (max-width: $bp-sm) {
         @include type-t2();
-        margin: 32px 0 3px 0;
+        margin: 32px 0 2px 0;
     }
 }
 
@@ -162,6 +162,15 @@ a {
     .pc-row__device-features {
         @media (max-width: $bp-md) {
             margin: 24px 0 0 0;
+        }
+    }
+    
+    .pc-row__img {
+        max-width: 75%;
+        height: auto;
+        
+        @media (max-width: $bp-md) {
+            max-width: 100%;
         }
     }
 }

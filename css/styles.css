@@ -1,27 +1,39 @@
 @font-face {
-  font-family: "Selawik";
-  src: url("../assets/fonts/selawik/selawk.eot");
-  src: url("../assets/fonts/selawik/selawk.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawk.ttf") format("truetype"); }
+  font-family: "Segoe UI";
+  font-weight: 200;
+  src: local("Segoe UI Light"); }
 
 @font-face {
-  font-family: "Selawik Bold";
-  src: url("../assets/fonts/selawik/selawkb.eot");
-  src: url("../assets/fonts/selawik/selawkb.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawkb.ttf") format("truetype"); }
+  font-family: "Segoe UI";
+  font-weight: 300;
+  src: local("Segoe UI Semilight"); }
 
 @font-face {
-  font-family: "Selawik Light";
-  src: url("../assets/fonts/selawik/selawkl.eot");
-  src: url("../assets/fonts/selawik/selawkl.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawkl.ttf") format("truetype"); }
+  font-family: "Segoe UI";
+  font-weight: 400;
+  src: local("Segoe UI"); }
 
 @font-face {
-  font-family: "Selawik Semibold";
-  src: url("../assets/fonts/selawik/selawksb.eot");
-  src: url("../assets/fonts/selawik/selawksb.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawksb.ttf") format("truetype"); }
+  font-family: "Segoe UI";
+  font-weight: 500;
+  src: local("Segoe UI Semibold"); }
 
 @font-face {
-  font-family: "Selawik Semilight";
-  src: url("../assets/fonts/selawik/selawksl.eot");
-  src: url("../assets/fonts/selawik/selawksl.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawksl.ttf") format("truetype"); }
+  font-family: "Segoe UI";
+  font-weight: 600;
+  src: local("Segoe UI Bold"); }
+
+@font-face {
+  font-family: "Segoe UI";
+  font-style: italic;
+  font-weight: 400;
+  src: local("Segoe UI Italic"); }
+
+@font-face {
+  font-family: "Segoe UI";
+  font-style: italic;
+  font-weight: 700;
+  src: local("Segoe UI Bold Italic"); }
 
 .type-secondary {
   opacity: 0.6; }
@@ -29,7 +41,7 @@
 body {
   background-color: #003966;
   color: white;
-  font-family: "Segoe UI", "Selawik", Tahoma, Verdana, Arial, sans-serif;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "San Francisco", "Roboto", "Helvetica Neue", "Lucida Grande", sans-serif;
   font-size: 15px;
   font-weight: normal; }
 
@@ -48,37 +60,33 @@ a {
   @media (max-width: 848px) {
     .content {
       width: auto;
-      margin: 0 24px; } }
+      margin: 0 3%; } }
 
 .banner__title {
-  font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
   font-size: 62px;
-  font-weight: normal;
+  font-weight: 200;
   line-height: 72px;
   text-align: center;
   margin: 68px 0 3px 0; }
   @media (max-width: 632px) {
     .banner__title {
-      font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
       font-size: 46px;
-      font-weight: normal;
+      font-weight: 200;
       line-height: 56px;
-      margin: 32px 0 3px 0; } }
+      margin: 32px 0 2px 0; } }
 
 .banner__subtitle {
-  font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
   font-size: 34px;
-  font-weight: normal;
+  font-weight: 200;
   line-height: 40px;
   text-align: center;
   width: 55%;
   margin: 0 auto; }
   @media (max-width: 632px) {
     .banner__subtitle {
-      font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
-      font-size: 26px;
-      font-weight: normal;
-      line-height: 32px;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 28px;
       width: 75%; } }
 
 .feature-phone {
@@ -114,9 +122,8 @@ a {
       margin: 0 0 88px 0; } }
 
 .device-features > .device-features__header {
-  font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
   font-size: 34px;
-  font-weight: normal;
+  font-weight: 200;
   line-height: 40px;
   margin: 0 0 0 16px; }
 
@@ -157,6 +164,12 @@ a {
   @media (max-width: 848px) {
     .pc-row .pc-row__device-features {
       margin: 24px 0 0 0; } }
+  .pc-row .pc-row__img {
+    max-width: 75%;
+    height: auto; }
+    @media (max-width: 848px) {
+      .pc-row .pc-row__img {
+        max-width: 100%; } }
 
 .go-btns {
   display: flex;
