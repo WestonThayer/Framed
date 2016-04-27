@@ -1,0 +1,186 @@
+@import "type";
+
+// Colors
+$primary-bg: #003966;
+$secondary-bg: #004E8C;
+$primary-fg: #fff;
+
+// Breakpoints
+$bp-lg: 1120px;
+$bp-md: 848px;
+$bp-sm: 632px;
+
+body {
+    background-color: $primary-bg;
+    color: white;
+    @include font-family_regular();
+    font-size: 15px;
+    font-weight: normal;
+}
+
+a {
+    color: $primary-fg;
+    text-decoration: none;
+    
+    //&:link {}
+    //&:visited {}
+    &:hover, &:focus { @include type-secondary(); }
+    //&:active: {}
+}
+
+.content {
+    width: 1024px;
+    margin: 0 auto;
+    
+    @media (max-width: $bp-lg) {
+        width: 800px;
+    }
+    
+    @media (max-width: $bp-md) {
+        width: auto;
+        margin: 0 24px;
+    }
+}
+
+.banner__title {
+    @include type-t1();
+    text-align: center;
+    margin: 68px 0 3px 0;
+    
+    @media (max-width: $bp-sm) {
+        @include type-t2();
+        margin: 32px 0 3px 0;
+    }
+}
+
+.banner__subtitle {
+    @include type-t3();
+    text-align: center;
+    width: 55%;
+    margin: 0 auto;
+    
+    @media (max-width: $bp-sm) {
+        @include type-t4();
+        width: 75%;
+    }
+}
+
+.feature-phone {
+    position: relative;
+    
+    @media (max-width: $bp-md) {
+        text-align: center;
+    }
+}
+
+.feature-phone__img__break {
+    transform: translate3d(-200px, 0px, 0px);
+    
+    @media (max-width: $bp-md) {
+        transform: none;
+    }
+}
+
+.feature-phone__features__break {
+    position: absolute;
+    top: 35%;
+    right: 15%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1s;
+    
+    @media (max-width: $bp-lg) {
+        right: 5%;
+    }
+    
+    @media (max-width: $bp-md) {
+        display: inline-block;
+        position: static;
+        top: auto;
+        right: auto;
+        z-index: 0;
+        text-align: left;
+        margin: 0 0 88px 0;
+    }
+}
+
+.device-features {
+    > .device-features__header {
+        @include type-t3();
+        margin: 0 0 0 16px;
+    }
+    
+    > .device-features__list {
+        margin: 10px 0 0 0;
+        padding: 0 0 0 18px;
+        
+        li { margin: 0 0 4px 0;}
+        
+        strong {
+            font-weight: normal;
+        }
+    }
+}
+
+.side-by-side {
+    margin: 0 0 96px 0;
+    
+    > .side-by-side__img {
+        display: inline-block;
+        margin: 8px 48px 24px 0;
+        vertical-align: top;
+        max-width: 100%;
+        height: auto;
+    }
+    
+    > .side-by-side__text {
+        display: inline-block;
+    }
+}
+
+.band {
+    padding: 200px 0;
+    
+    @media (max-width: $bp-md) {
+        padding: 100px 0;
+    }
+}
+
+.pc-row {
+    background-color: $secondary-bg;
+    
+    > .pc-row__content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+        @media (max-width: $bp-md) {
+            flex-direction: column-reverse;
+        }
+    }
+    
+    .pc-row__device-features {
+        @media (max-width: $bp-md) {
+            margin: 24px 0 0 0;
+        }
+    }
+}
+
+.go-btns {
+    display: flex;
+    justify-content: center;
+    
+    @media (max-width: 468px) {
+        flex-direction: column;
+        justify-content: initial;
+        align-items: center;
+    }
+    
+    > .go-btns__second {
+        margin: 0 0 0 12px;
+        
+        @media (max-width: 468px) {
+            margin: 12px 0 0 0;
+        }
+    }
+}

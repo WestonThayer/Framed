@@ -1,0 +1,173 @@
+@font-face {
+  font-family: "Selawik";
+  src: url("../assets/fonts/selawik/selawk.eot");
+  src: url("../assets/fonts/selawik/selawk.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawk.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "Selawik Bold";
+  src: url("../assets/fonts/selawik/selawkb.eot");
+  src: url("../assets/fonts/selawik/selawkb.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawkb.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "Selawik Light";
+  src: url("../assets/fonts/selawik/selawkl.eot");
+  src: url("../assets/fonts/selawik/selawkl.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawkl.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "Selawik Semibold";
+  src: url("../assets/fonts/selawik/selawksb.eot");
+  src: url("../assets/fonts/selawik/selawksb.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawksb.ttf") format("truetype"); }
+
+@font-face {
+  font-family: "Selawik Semilight";
+  src: url("../assets/fonts/selawik/selawksl.eot");
+  src: url("../assets/fonts/selawik/selawksl.eot#iefix") format("embedded-opentype"), url("../assets/fonts/selawik/selawksl.ttf") format("truetype"); }
+
+.type-secondary {
+  opacity: 0.6; }
+
+body {
+  background-color: #003966;
+  color: white;
+  font-family: "Segoe UI", "Selawik", Tahoma, Verdana, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: normal; }
+
+a {
+  color: #fff;
+  text-decoration: none; }
+  a:hover, a:focus {
+    opacity: 0.6; }
+
+.content {
+  width: 1024px;
+  margin: 0 auto; }
+  @media (max-width: 1120px) {
+    .content {
+      width: 800px; } }
+  @media (max-width: 848px) {
+    .content {
+      width: auto;
+      margin: 0 24px; } }
+
+.banner__title {
+  font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
+  font-size: 62px;
+  font-weight: normal;
+  line-height: 72px;
+  text-align: center;
+  margin: 68px 0 3px 0; }
+  @media (max-width: 632px) {
+    .banner__title {
+      font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
+      font-size: 46px;
+      font-weight: normal;
+      line-height: 56px;
+      margin: 32px 0 3px 0; } }
+
+.banner__subtitle {
+  font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
+  font-size: 34px;
+  font-weight: normal;
+  line-height: 40px;
+  text-align: center;
+  width: 55%;
+  margin: 0 auto; }
+  @media (max-width: 632px) {
+    .banner__subtitle {
+      font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
+      font-size: 26px;
+      font-weight: normal;
+      line-height: 32px;
+      width: 75%; } }
+
+.feature-phone {
+  position: relative; }
+  @media (max-width: 848px) {
+    .feature-phone {
+      text-align: center; } }
+
+.feature-phone__img__break {
+  transform: translate3d(-200px, 0px, 0px); }
+  @media (max-width: 848px) {
+    .feature-phone__img__break {
+      transform: none; } }
+
+.feature-phone__features__break {
+  position: absolute;
+  top: 35%;
+  right: 15%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 1s; }
+  @media (max-width: 1120px) {
+    .feature-phone__features__break {
+      right: 5%; } }
+  @media (max-width: 848px) {
+    .feature-phone__features__break {
+      display: inline-block;
+      position: static;
+      top: auto;
+      right: auto;
+      z-index: 0;
+      text-align: left;
+      margin: 0 0 88px 0; } }
+
+.device-features > .device-features__header {
+  font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
+  font-size: 34px;
+  font-weight: normal;
+  line-height: 40px;
+  margin: 0 0 0 16px; }
+
+.device-features > .device-features__list {
+  margin: 10px 0 0 0;
+  padding: 0 0 0 18px; }
+  .device-features > .device-features__list li {
+    margin: 0 0 4px 0; }
+  .device-features > .device-features__list strong {
+    font-weight: normal; }
+
+.side-by-side {
+  margin: 0 0 96px 0; }
+  .side-by-side > .side-by-side__img {
+    display: inline-block;
+    margin: 8px 48px 24px 0;
+    vertical-align: top;
+    max-width: 100%;
+    height: auto; }
+  .side-by-side > .side-by-side__text {
+    display: inline-block; }
+
+.band {
+  padding: 200px 0; }
+  @media (max-width: 848px) {
+    .band {
+      padding: 100px 0; } }
+
+.pc-row {
+  background-color: #004E8C; }
+  .pc-row > .pc-row__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    @media (max-width: 848px) {
+      .pc-row > .pc-row__content {
+        flex-direction: column-reverse; } }
+  @media (max-width: 848px) {
+    .pc-row .pc-row__device-features {
+      margin: 24px 0 0 0; } }
+
+.go-btns {
+  display: flex;
+  justify-content: center; }
+  @media (max-width: 468px) {
+    .go-btns {
+      flex-direction: column;
+      justify-content: initial;
+      align-items: center; } }
+  .go-btns > .go-btns__second {
+    margin: 0 0 0 12px; }
+    @media (max-width: 468px) {
+      .go-btns > .go-btns__second {
+        margin: 12px 0 0 0; } }

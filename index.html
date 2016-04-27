@@ -1,1 +1,124 @@
-Hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Framed - a fullscreen browser for prototypes on Windows</title>
+    <meta name="description" content="Framed is the app that lets you prototype experiences in the browser, then run on any Windows device.">
+
+    <!-- Define a viewport to mobile devices to use - telling the browser to assume that the page is as wide as the device (width=device-width) and setting the initial page zoom level to be 1 (initial-scale=1.0) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="css/normalize.css" rel="stylesheet" media="all">
+    <link href="css/styles.css" rel="stylesheet" media="all">
+    
+    <script>
+        window.fadeIn = function(img) {
+            img.style.opacity = 1;
+        };
+    </script>
+</head>
+<body>
+    <div class="content">
+        <header role="banner" style="margin: 8px 0 0 0;">
+            <img src="assets/logo.png" />
+            <a href="https://www.microsoft.com/store/apps/9nblggh4nxcp?ocid=badge" style="float: right; margin: 11px 0 0 0; display: flex; align-items: center;">
+                <img src="assets/win.png" width="24" /><span style="margin: 0 0 0 12px;">Download</span>
+            </a>
+            <h1 class="banner__title">Framed</h1>
+            <div class="banner__subtitle">
+                <span class="type-secondary">Rapidly prototype with </span><a href="https://framerjs.com/">Framer</a><span class="type-secondary">. Interact with your designs on any Windows device.</span>
+            </div>
+        </header>
+        
+        <div id="feature-phone" class="feature-phone">
+            <img id="feature-phone__img" src="assets/phone.png" width="500" height="790" onload="fadeIn(this)" style="display: block; margin: 0 auto; opacity: 0;  transition: opacity 1s, transform 1s; max-width: 100%; height: auto;" title="Credit to https://www.behance.net/gallery/25659203/Lumia-640-640-XL-free-vector-template" />
+            <div id="feature-phone__features" class="device-features feature-phone__features__break">
+                <h2 class="device-features__header">Phones</h2>
+                <ul class="device-features__list">
+                    <li><strong>Fullscreen</strong> - experience your design like a native app</li>
+                    <li><strong>Sync</strong> - connect and stay in sync with Framer</li>
+                    <li><strong>Refresh</strong> - just press the Camera button</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="pc-row">
+        <div class="content pc-row__content band">
+            <div class="device-features pc-row__device-features">
+                <h2 class="device-features__header">PC &amp; Tablet</h2>
+                <ul class="device-features__list">
+                    <li><strong>Windowed</strong> - runs in a normal desktop window that can be position, resized</li>
+                    <li><strong>Full-bleed</strong> - hide the titlebar and create immersive experiences</li>
+                    <li><strong>Pen</strong> - bring the precision of a pen into your UX</li>
+                </ul>
+            </div>
+            <img src="assets/pcs.png" style="width: 75%; height: auto;" />
+        </div>
+    </div>
+    <div class="content band">
+        <div class="side-by-side">
+            <img src="assets/hololens.png" class="side-by-side__img" style="opacity: 0.6;" />
+            <div class="device-features side-by-side__text">
+                <h2 class="device-features__header">Hololens (untested)</h2>
+                <ul class="device-features__list">
+                    <li><strong>In the world</strong> - pin the window to real-world surfaces</li>
+                    <li><strong>Air tap</strong> - works like standard mouse input</li>
+                    <li><strong>VR?</strong> - might work :)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="side-by-side">
+            <img src="assets/xbox.png" class="side-by-side__img" style="opacity: 0.6;" />
+            <div class="device-features side-by-side__text">
+                <h2 class="device-features__header">Xbox (coming soon)</h2>
+                <ul class="device-features__list">
+                    <li><strong>Design for TV</strong> - be cinematic in the living room</li>
+                    <li><strong>Controllers</strong> - Use an Xbox controller or remote and prototype the focus flow</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="go-btns">
+            <a class="go-btns__first" href="https://www.microsoft.com/store/apps/9nblggh4nxcp?ocid=badge">
+                <img src="https://assets.windowsphone.com/f2f77ec7-9ba9-4850-9ebe-77e366d08adc/English_Get_it_Win_10_InvariantCulture_Default.png" width="200" alt="Get it on Windows 10" />
+            </a>
+            <a class="go-btns__second" href="https://github.com/WestonThayer/Framed" style="width: 200px; height: 68px; border: 2px solid white; text-align: center; line-height: 64px; font-size: 20px;">Source on GitHub</a>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin: 32px 0;">
+        <span class="type-secondary">By </span><a href="http://westonthayer.com/">Weston Thayer</a><span class="type-secondary">. Fork it on </span><a href="https://github.com/WestonThayer/Framed">GitHub</a><span class="type-secondary">.</span>
+    </div>
+    
+    <script>
+        (function() {
+            var feature = document.querySelector("#feature-phone");
+            var featureImg = document.querySelector("#feature-phone__img");
+            var featureFeatures = document.querySelector("#feature-phone__features");
+            
+            function checkFeature() {
+                var windowHeight = window.innerHeight;
+                var windowTop = window.scrollY;
+                var windowBottom = windowHeight + windowTop;
+                
+                var featureHeight = feature.clientHeight;
+                var featureTop = feature.offsetTop + 500;
+                var featureBottom = featureHeight + featureTop;
+                
+                if (featureBottom > windowTop && featureTop < windowBottom) {
+                    if (featureImg.className !== "feature-phone__img__break") {
+                        featureImg.className = "feature-phone__img__break";
+                    }
+                    featureFeatures.style.opacity = 1;
+                }
+            }
+            
+            checkFeature();
+            
+            window.addEventListener("scroll", checkFeature);
+            window.addEventListener("resize", checkFeature);
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+$font-path: "../assets/fonts/selawik";
+
+@font-face {
+    font-family: "Selawik";
+    src: url("#{$font-path}/selawk.eot");
+    src: url("#{$font-path}/selawk.eot#iefix") format("embedded-opentype"),
+         url("#{$font-path}/selawk.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Selawik Bold";
+    src: url("#{$font-path}/selawkb.eot");
+    src: url("#{$font-path}/selawkb.eot#iefix") format("embedded-opentype"),
+         url("#{$font-path}/selawkb.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Selawik Light";
+    src: url("#{$font-path}/selawkl.eot");
+    src: url("#{$font-path}/selawkl.eot#iefix") format("embedded-opentype"),
+         url("#{$font-path}/selawkl.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Selawik Semibold";
+    src: url("#{$font-path}/selawksb.eot");
+    src: url("#{$font-path}/selawksb.eot#iefix") format("embedded-opentype"),
+         url("#{$font-path}/selawksb.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Selawik Semilight";
+    src: url("#{$font-path}/selawksl.eot");
+    src: url("#{$font-path}/selawksl.eot#iefix") format("embedded-opentype"),
+         url("#{$font-path}/selawksl.ttf") format("truetype");
+}
+
+@mixin font-family_regular() {
+    font-family: "Segoe UI", "Selawik", Tahoma, Verdana, Arial, sans-serif;
+}
+
+@mixin font-family_light() {
+    font-family: "Segoe UI Light", "Selawik Light", Tahoma, Verdana, Arial, sans-serif;
+}
+
+@mixin font-family_semibold() {
+    font-family: "Segoe UI Semibold", "Selawik Semibold", Tahoma, Verdana, Arial, sans-serif;
+}
+
+@mixin type-t1() {
+    @include font-family_light();
+    font-size: 62px;
+    font-weight: normal;
+    line-height: 72px;
+}
+
+@mixin type-t2() {
+    @include font-family_light();
+    font-size: 46px;
+    font-weight: normal;
+    line-height: 56px;
+}
+
+@mixin type-t3() {
+    @include font-family_light();
+    font-size: 34px;
+    font-weight: normal;
+    line-height: 40px;
+}
+
+@mixin type-t4() {
+    @include font-family_light();
+    font-size: 26px;
+    font-weight: normal;
+    line-height: 32px;
+}
+
+@mixin type-secondary() {
+    opacity: 0.6;
+}
+
+.type-secondary {
+    @include type-secondary();
+}

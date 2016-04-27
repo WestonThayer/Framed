@@ -1,0 +1,29 @@
+{
+  "name": "framed-ghpages",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Framed",
+  "main": "index.js",
+  "scripts": {
+    "sass": "gulp sass",
+    "sass-watch": "gulp sass-watch",
+    "minify-images": "gulp minify-images",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WestonThayer/Framed.git"
+  },
+  "author": "Weston Thayer <me@westonthayer.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WestonThayer/Framed/issues"
+  },
+  "homepage": "https://github.com/WestonThayer/Framed#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-sass": "^2.3.1",
+    "imagemin-pngquant": "^4.2.2"
+  }
+}
