@@ -281,11 +281,10 @@
                     <Button
                         Style="{StaticResource TextBlockButtonStyle}"
                         Padding="0,4,8,4"
-                        Margin="0,0,0,12"
                         Click="ShowAdvancedButton_Click"
                         Content="Show advanced" />
 
-                    <StackPanel x:Name="AdvancedStackPanel" Visibility="Collapsed">
+                    <StackPanel x:Name="AdvancedStackPanel" Visibility="Collapsed" Margin="0,12,0,48">
                         <StackPanel.Resources>
                             <Storyboard x:Name="AdvancedStackPanelShowStoryboard">
                                 <DoubleAnimation
@@ -414,6 +413,12 @@
                             Margin="0,24,0,0"
                             IsChecked="{x:Bind Settings.IsCameraShortcutEnabled, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
                     </StackPanel>
+
+                    <Button
+                        Style="{StaticResource TextBlockButtonStyle}"
+                        Padding="0,4,8,4"
+                        Click="AboutButton_Click"
+                        Content="About" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

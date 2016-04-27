@@ -185,5 +185,15 @@ namespace Framed
                 this.Settings.PreferredWindowHeight = height;
             }
         }
+
+        private async void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog d = new ContentDialog();
+            d.Title = "About";
+            d.Content = new AboutContent();
+            d.PrimaryButtonText = "Close";
+
+            await d.ShowAsync();
+        }
     }
 }
