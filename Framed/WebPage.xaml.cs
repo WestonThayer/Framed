@@ -129,6 +129,21 @@ namespace Framed
                 Window.Current.SetTitleBar(TitleBarRect);
             }
 
+            if (this.settings.IsPreferredWindowSizeEnabled)
+            {
+                int w = this.settings.PreferredWindowWidth;
+                int h = this.settings.PreferredWindowHeight;
+
+                if (this.settings.IsTitleBarTransparent)
+                {
+                    // Chop off 31px reserved for the title bar off our height, otherwise
+                    // user will be confused
+                    h -= 31;
+                }
+
+                ApplicationView.GetForCurrentView().TryResizeView(new Size(w, h));
+            }
+
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 
             // Make sure the user always sees a blank page

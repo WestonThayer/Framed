@@ -105,6 +105,45 @@ namespace Framed
             }
         }
 
+        public bool IsPreferredWindowSizeEnabled
+        {
+            get
+            {
+                var v = ApplicationData.Current.LocalSettings.Values["IsPreferredWindowSizeEnabled"] as bool?;
+                return v ?? false;
+            }
+            set
+            {
+                ApplicationData.Current.LocalSettings.Values["IsPreferredWindowSizeEnabled"] = value;
+            }
+        }
+
+        public int PreferredWindowWidth
+        {
+            get
+            {
+                var v = ApplicationData.Current.LocalSettings.Values["PreferredWindowWidth"] as int?;
+                return v ?? 500;
+            }
+            set
+            {
+                ApplicationData.Current.LocalSettings.Values["PreferredWindowWidth"] = value;
+            }
+        }
+
+        public int PreferredWindowHeight
+        {
+            get
+            {
+                var v = ApplicationData.Current.LocalSettings.Values["PreferredWindowHeight"] as int?;
+                return v ?? 400;
+            }
+            set
+            {
+                ApplicationData.Current.LocalSettings.Values["PreferredWindowHeight"] = value;
+            }
+        }
+
         public Settings()
         {
 

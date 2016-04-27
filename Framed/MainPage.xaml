@@ -343,6 +343,55 @@
                                 Foreground="Red" />
                         </StackPanel>
 
+                        <CheckBox
+                            x:Name="IsPreferredWindowSizeEnabledCheckBox"
+                            Content="Resize PC window"
+                            Margin="0,24,0,0"
+                            IsEnabled="{x:Bind IsFullScreenCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NotNullableBoolToBool}}"
+                            IsChecked="{x:Bind Settings.IsPreferredWindowSizeEnabled, Mode=TwoWay, Converter={StaticResource BoolToNullableBool}}" />
+                        <TextBlock
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Opacity="{x:Bind IsPreferredWindowSizeEnabledCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource TipBoolToOpacity}}"
+                            Margin="0,0,0,24">
+                            <Run Text="Make the window size match your prototype's size. Dimensions are in " />
+                            <Hyperlink NavigateUri="https://msdn.microsoft.com/windows/uwp/layout/design-and-ui-intro#effective-pixels-and-scaling">
+                                <Run Text="effective pixels" />
+                            </Hyperlink>
+                            <Run Text="." />
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,12">
+                            <TextBox
+                                x:Name="PreferredWindowWidthTextBox"
+                                IsEnabled="{x:Bind IsPreferredWindowSizeEnabledCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
+                                Header="Width (epx)"
+                                TextChanging="PreferredWindowWidthTextBox_TextChanging"
+                                TextChanged="PreferredWindowWidthTextBox_TextChanged"
+                                InputScope="Digits"
+                                IsSpellCheckEnabled="False" />
+                            <TextBlock
+                                x:Name="PreferredWindowWidthErrorTextBlock"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                VerticalAlignment="Bottom"
+                                Margin="4,0,0,8"
+                                Foreground="Red" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBox
+                                x:Name="PreferredWindowHeightTextBox"
+                                IsEnabled="{x:Bind IsPreferredWindowSizeEnabledCheckBox.IsChecked, Mode=OneWay, Converter={StaticResource NullableBoolToBool}}"
+                                Header="Width (epx)"
+                                TextChanging="PreferredWindowHeightTextBox_TextChanging"
+                                TextChanged="PreferredWindowHeightTextBox_TextChanged"
+                                InputScope="Digits"
+                                IsSpellCheckEnabled="False" />
+                            <TextBlock
+                                x:Name="PreferredWindowHeightErrorTextBlock"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                VerticalAlignment="Bottom"
+                                Margin="4,0,0,8"
+                                Foreground="Red" />
+                        </StackPanel>
+
                         <ToggleSwitch
                             OnContent="Keyboard shortcuts on"
                             OffContent="Keyboard shortcuts off"

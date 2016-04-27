@@ -45,6 +45,9 @@ namespace Framed
 
             ARGBColorTextBox.Text = this.Settings.TitleBarButtonBackground.ToString();
             RGBColorTextBox.Text = this.Settings.TitleBarButtonForeground.ToString(true);
+
+            PreferredWindowWidthTextBox.Text = this.Settings.PreferredWindowWidth.ToString();
+            PreferredWindowHeightTextBox.Text = this.Settings.PreferredWindowHeight.ToString();
         }
 
         private void GoButton_Click(object sender, RoutedEventArgs e)
@@ -128,6 +131,58 @@ namespace Framed
             if (tb.Text.Length == 7 && rgbRx.IsMatch(tb.Text))
             {
                 this.Settings.TitleBarButtonForeground = ColorExtensions.Parse(tb.Text);
+            }
+        }
+
+        private void PreferredWindowWidthTextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            TextBox tb = sender as TextBox;
+            int v;
+
+            if (!int.TryParse(tb.Text, out v))
+            {
+                PreferredWindowWidthErrorTextBlock.Text = "Invalid width";
+            }
+            else
+            {
+                PreferredWindowWidthErrorTextBlock.Text = string.Empty;
+            }
+        }
+
+        private void PreferredWindowWidthTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            int width;
+
+            if (int.TryParse(tb.Text, out width))
+            {
+                this.Settings.PreferredWindowWidth = width;
+            }
+        }
+
+        private void PreferredWindowHeightTextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            TextBox tb = sender as TextBox;
+            int v;
+
+            if (!int.TryParse(tb.Text, out v))
+            {
+                PreferredWindowHeightErrorTextBlock.Text = "Invalid height";
+            }
+            else
+            {
+                PreferredWindowHeightErrorTextBlock.Text = string.Empty;
+            }
+        }
+
+        private void PreferredWindowHeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            int height;
+
+            if (int.TryParse(tb.Text, out height))
+            {
+                this.Settings.PreferredWindowHeight = height;
             }
         }
     }

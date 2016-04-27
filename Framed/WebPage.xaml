@@ -24,7 +24,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
             Width="186"
-            Height="32" />
+            Height="31" />
         <ProgressBar
             x:Name="LoadingProgressBar"
             HorizontalAlignment="Stretch"
