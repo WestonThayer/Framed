@@ -107,6 +107,7 @@ namespace Framed
                 var t = ApplicationView.GetForCurrentView().TitleBar;
                 t.ButtonBackgroundColor = settings.TitleBarButtonBackground;
                 t.ButtonForegroundColor = settings.TitleBarButtonForeground;
+                TitleBarRect.Visibility = Visibility.Visible;
                 Window.Current.SetTitleBar(TitleBarRect);
             }
 
@@ -135,6 +136,7 @@ namespace Framed
                 var t = ApplicationView.GetForCurrentView().TitleBar;
                 t.ButtonBackgroundColor = null;
                 t.ButtonForegroundColor = null;
+                TitleBarRect.Visibility = Visibility.Collapsed;
             }
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;

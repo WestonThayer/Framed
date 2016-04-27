@@ -19,10 +19,11 @@
         It forces Windows to render the smallest draggable area possible. -->
         <Rectangle
             x:Name="TitleBarRect"
+            Visibility="Collapsed"
             Fill="Transparent"
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
-            Width="10"
+            Width="186"
             Height="32" />
         <ProgressBar
             x:Name="LoadingProgressBar"
