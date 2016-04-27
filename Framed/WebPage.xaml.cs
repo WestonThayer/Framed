@@ -93,7 +93,25 @@ namespace Framed
 
             if (urlUri == null)
             {
-                urlUri = new Uri(url);
+                try
+                {
+                    urlUri = new Uri(url);
+                }
+                catch (UriFormatException)
+                {
+                    ContentDialog d = new ContentDialog();
+                    d.Title = "Oops";
+                    d.Content = "We couldn't navigate to " + url + ". Check to see if the link is formatted correctly.";
+                    d.PrimaryButtonText = "Go back";
+
+                    await d.ShowAsync();
+
+                    if (this.Frame.CanGoBack)
+                    {
+                        this.Frame.GoBack();
+                        return;
+                    }
+                }
             }
 
             if (this.settings.IsFullScreen)
