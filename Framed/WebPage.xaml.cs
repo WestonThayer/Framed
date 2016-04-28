@@ -47,9 +47,9 @@ namespace Framed
             }
         }
 
-        private void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
+        private async void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
         {
-            MyWebView.Refresh();
+            await MyWebView.InvokeScriptAsync("eval", new string[] { "location.reload(true);" });
         }
 
         private void Nav_BackRequested(object sender, BackRequestedEventArgs e)
@@ -75,6 +75,9 @@ namespace Framed
         {
             base.OnNavigatedTo(e);
             this.isLoaded = false;
+
+            // Always clear the cache on first launch
+            await WebView.ClearTemporaryWebDataAsync();
 
             string url = e.Parameter as string;
             Uri urlUri = null;
@@ -209,10 +212,10 @@ namespace Framed
             // <ALT + LEFT_ARROW> support to go back
             string js = 
 @"window.addEventListener('keydown', function(event) {if (event.key === 'F5') {
-        location.reload();
+        location.reload(true);
     }
     else if (event.ctrlKey && event.key === 'r') {
-        location.reload();
+        location.reload(true);
     }
     else if (event.altKey && event.key === 'Left') {
         window.history.back();
