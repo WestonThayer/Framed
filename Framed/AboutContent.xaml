@@ -21,6 +21,8 @@
         <LineBreak />
         <Hyperlink NavigateUri="http://framerjs.com/">framerjs.com</Hyperlink>
         <LineBreak />
+        <Hyperlink NavigateUri="https://www.facebook.com/groups/framerjs/">Framer JS Facebook group</Hyperlink>
+        <LineBreak />
         <Hyperlink NavigateUri="http://framerco.de/">framerco.de</Hyperlink>
         <LineBreak />
         <Hyperlink NavigateUri="http://play.google.com/store/apps/details?id=com.framerjs.android">Framer for Android</Hyperlink>
