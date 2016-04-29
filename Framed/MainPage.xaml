@@ -232,7 +232,7 @@
                         <AdaptiveTrigger MinWindowWidth="655" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="RootStackPanel.Margin" Value="24,80,24,88" />
+                        <Setter Target="RootStackPanel.Margin" Value="0,80,0,88" />
                         <Setter Target="RootStackPanel.Width" Value="600" />
                         <Setter Target="RootStackPanel.HorizontalAlignment" Value="Center" />
                     </VisualState.Setters>
@@ -243,11 +243,13 @@
         <ScrollViewer
             x:Name="RootScrollViewer"
             HorizontalScrollMode="Disabled"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Auto"
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch">
             <StackPanel
                 x:Name="RootStackPanel"
-                Margin="12,80,12,88"
+                Margin="0,80,0,88"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Stretch">
                 <TextBlock
@@ -263,10 +265,62 @@
                     IsSpellCheckEnabled="False"
                     KeyDown="UrlTextBox_KeyDown"
                     HorizontalAlignment="Stretch"
-                    Margin="0,0,0,60"
+                    Margin="12,0,12,12"
+                    PreventKeyboardDisplayOnProgrammaticFocus="True"
                     PlaceholderText="ex: http://share.framerjs.com/5hoqt6ydidpc/" />
 
-                <StackPanel MaxWidth="400" HorizontalAlignment="Left">
+                <ListView
+                    x:Name="HistoryListView"
+                    SelectionMode="None"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.HorizontalScrollMode="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollMode="Disabled"
+                    IsItemClickEnabled="True"
+                    ItemClick="HistoryListView_ItemClick">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="VerticalContentAlignment" Value="Top" />
+                            <Setter Property="Padding" Value="0,0,0,0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Top" Margin="12,2,0,0">
+                                <TextBlock
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="{Binding DocumentTitle}"
+                                    FontSize="13"
+                                    TextWrapping="NoWrap" />
+                                <TextBlock
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    FontSize="13"
+                                    Text="{Binding Url}"
+                                    TextWrapping="NoWrap"
+                                    Opacity="0.6" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Button
+                    x:Name="ClearHistoryButton"
+                    Visibility="Collapsed"
+                    Style="{StaticResource TextBlockButtonStyle}"
+                    Content="Clear history"
+                    Click="ClearHistoryButton_Click"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,12,0"
+                    Padding="8,4,0,4" />
+
+                <Rectangle
+                    x:Name="HistoryDividerRectangle"
+                    Visibility="Collapsed"
+                    Height="1"
+                    HorizontalAlignment="Stretch"
+                    Fill="{ThemeResource SystemControlPageBackgroundListLowBrush}" Margin="12,4,12,0" />
+
+                <StackPanel MaxWidth="400" HorizontalAlignment="Left" Margin="12,32,12,0">
                     <CheckBox
                         x:Name="IsFullScreenCheckBox"
                         Content="Use fullscreen"
