@@ -4,7 +4,7 @@ A fullscreen browser for prototyping on Windows. Friend of [Framer](https://fram
 
 http://westonthayer.github.io/Framed/
 
-![Screenshot of Framed running on a PC](http://westonthayer.github.io/Framed/assets/pcs.png)
+![Screenshot of Framed running on a PC](https://raw.githubusercontent.com/WestonThayer/Framed/gh-pages/assets/pcs.png)
 
 ## Contributing
 
