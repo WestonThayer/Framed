@@ -31,6 +31,7 @@ namespace Framed
     {
         private Settings settings;
         private bool isLoaded; // If true, we loaded our first page already
+        private bool isLoadedCompleted; // If true, we finished loading our first page already
 
         public WebPage()
         {
@@ -75,6 +76,7 @@ namespace Framed
         {
             base.OnNavigatedTo(e);
             this.isLoaded = false;
+            this.isLoadedCompleted = false;
 
             // Always clear the cache on first launch
             await WebView.ClearTemporaryWebDataAsync();
@@ -197,14 +199,29 @@ namespace Framed
                 await d.ShowAsync();
             }
 
-            // Check for the landing page so that the user doesn't have to press
-            // back an extra time
-            string m = args.Uri.Scheme + "://" + args.Uri.AbsolutePath;
-            if (this.isLoaded && m == "ms-appx-web:///landingpage.html")
+            if (this.isLoaded)
             {
-                if (this.Frame.CanGoBack)
+                string m = args.Uri.Scheme + "://" + args.Uri.AbsolutePath;
+
+                if (m != "ms-appx-web:///landingpage.html" && !this.isLoadedCompleted)
                 {
-                    this.Frame.GoBack();
+                    this.isLoadedCompleted = true;
+
+                    this.settings.AddToHistory(new SavedLink()
+                    {
+                        DocumentTitle = MyWebView.DocumentTitle,
+                        Url = args.Uri.ToString()
+                    });
+                }
+
+                // Check for the landing page so that the user doesn't have to press
+                // back an extra time
+                if (m == "ms-appx-web:///landingpage.html")
+                {
+                    if (this.Frame.CanGoBack)
+                    {
+                        this.Frame.GoBack();
+                    }
                 }
             }
 

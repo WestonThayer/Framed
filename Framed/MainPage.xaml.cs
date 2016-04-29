@@ -42,12 +42,26 @@ namespace Framed
             {
                 IsCameraShortcutEnabledCheckBox.Visibility = Visibility.Visible;
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
 
             ARGBColorTextBox.Text = this.Settings.TitleBarButtonBackground.ToString();
             RGBColorTextBox.Text = this.Settings.TitleBarButtonForeground.ToString(true);
 
             PreferredWindowWidthTextBox.Text = this.Settings.PreferredWindowWidth.ToString();
             PreferredWindowHeightTextBox.Text = this.Settings.PreferredWindowHeight.ToString();
+
+            List<SavedLink> history = this.Settings.History;
+            HistoryListView.ItemsSource = history;
+
+            if (history.Count > 0)
+            {
+                ClearHistoryButton.Visibility = Visibility.Visible;
+                HistoryDividerRectangle.Visibility = Visibility.Visible;
+            }
         }
 
         private void GoButton_Click(object sender, RoutedEventArgs e)
@@ -84,7 +98,7 @@ namespace Framed
             }
         }
 
-
+        #region TextBox Validation
 
         private void ARGBColorTextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
@@ -186,6 +200,8 @@ namespace Framed
             }
         }
 
+        #endregion
+
         private async void AboutButton_Click(object sender, RoutedEventArgs e)
         {
             ContentDialog d = new ContentDialog();
@@ -194,6 +210,24 @@ namespace Framed
             d.PrimaryButtonText = "Close";
 
             await d.ShowAsync();
+        }
+
+        private void HistoryListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            SavedLink s = e.ClickedItem as SavedLink;
+
+            UrlTextBox.Text = s.Url;
+            UrlTextBox.Focus(FocusState.Programmatic);
+            UrlTextBox.SelectionStart = UrlTextBox.Text.Length;
+        }
+
+        private void ClearHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Settings.ClearHistory();
+
+            HistoryListView.ItemsSource = null;
+            ClearHistoryButton.Visibility = Visibility.Collapsed;
+            HistoryDividerRectangle.Visibility = Visibility.Collapsed;
         }
     }
 }
