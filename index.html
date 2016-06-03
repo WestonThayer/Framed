@@ -30,7 +30,11 @@
         </header>
         
         <div id="feature-phone" class="feature-phone">
-            <img id="feature-phone__img" src="assets/phone.png" width="500" height="790" onload="fadeIn(this)" style="display: block; margin: 0 auto; opacity: 0;  transition: opacity 1s, transform 1s; max-width: 100%; height: auto;" title="Credit to https://www.behance.net/gallery/25659203/Lumia-640-640-XL-free-vector-template" />
+            <div id="feature-phone__img" style="max-width: 500px; margin: 0 auto; transition: transform 1s;">
+                <div style="height: 0; padding-bottom: 158%;">
+                    <img onload="fadeIn(this)" src="assets/phone.png" width="500" height="790" style="max-width: 100%; height: auto; opacity: 0; transition: opacity 1s;" title="Credit to https://www.behance.net/gallery/25659203/Lumia-640-640-XL-free-vector-template" />
+                </div>
+            </div>
             <div id="feature-phone__features" class="device-features feature-phone__features__break">
                 <h2 class="device-features__header">Phones</h2>
                 <ul class="device-features__list">
